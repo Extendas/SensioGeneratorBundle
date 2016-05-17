@@ -78,7 +78,14 @@ class DoctrineCrudGenerator extends Generator
 
         $this->generateControllerClass($forceOverwrite);
 
-        $dir = sprintf('%s/Resources/views/%s', $this->rootDir, str_replace('\\', '/', strtolower($this->entity)));
+        $parts = explode('\\',$this->entity);
+        foreach($parts as $key => $part)
+        {
+            $parts[$key] = ucfirst($part);
+        }
+        $ucfirst_entity = implode('/', $parts);
+
+        $dir = sprintf('%s/Resources/views/%s', $bundle->getPath(), $ucfirst_entity);
 
         if (!file_exists($dir)) {
             $this->filesystem->mkdir($dir, 0777);
@@ -181,6 +188,7 @@ class DoctrineCrudGenerator extends Generator
             'namespace' => $this->bundle->getNamespace(),
             'entity_namespace' => $entityNamespace,
             'format' => $this->format,
+            'fields' => $this->metadata->fieldMappings,
         ));
     }
 
@@ -206,6 +214,7 @@ class DoctrineCrudGenerator extends Generator
             'entity_namespace' => $entityNamespace,
             'actions' => $this->actions,
             'form_type_name' => strtolower(str_replace('\\', '_', $this->bundle->getNamespace()).($parts ? '_' : '').implode('_', $parts).'_'.$entityClass),
+            'fields' => $this->metadata->fieldMappings,
         ));
     }
 

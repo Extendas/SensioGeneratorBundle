@@ -133,7 +133,7 @@ EOT
         if ('annotation' != $format) {
             $runner($this->updateRouting($questionHelper, $input, $output, $bundle, $format, $entity, $prefix));
         } else {
-            $runner($this->updateAnnotationRouting($bundle, $entity, $prefix));
+            //$runner($this->updateAnnotationRouting($bundle, $entity, $prefix));
         }
 
         $questionHelper->writeGeneratorSummary($output, $errors);
