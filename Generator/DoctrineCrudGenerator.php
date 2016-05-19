@@ -189,6 +189,7 @@ class DoctrineCrudGenerator extends Generator
             'entity_namespace' => $entityNamespace,
             'format' => $this->format,
             'fields' => $this->metadata->fieldMappings,
+            'identifier' => $this->metadata->identifier[0],
         ));
     }
 
@@ -215,6 +216,7 @@ class DoctrineCrudGenerator extends Generator
             'actions' => $this->actions,
             'form_type_name' => strtolower(str_replace('\\', '_', $this->bundle->getNamespace()).($parts ? '_' : '').implode('_', $parts).'_'.$entityClass),
             'fields' => $this->metadata->fieldMappings,
+            'identifier' => $this->metadata->identifier[0],
         ));
     }
 
